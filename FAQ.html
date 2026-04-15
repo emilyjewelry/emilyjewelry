@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FAQ Emily Jewelry - Pertanyaan yang sering diajukan tentang produk, pembayaran, pengiriman, dan layanan kami.">
+    <meta name="keywords" content="faq, pertanyaan, jawaban, bantuan, emily jewelry">
+    <title>FAQ - Emily Jewelry</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* FAQ Specific Styles */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-intro h2 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .faq-intro p {
+            color: var(--gray-color);
+            font-size: 1.1rem;
+        }
+
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            padding: 12px 20px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            color: var(--dark-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--light-color);
+        }
+
+        .category-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .faq-list {
+            margin-top: 30px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.1);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 25px 30px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question {
+            background: var(--light-color);
+        }
+
+        .faq-search {
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--gray-color);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray-color);
+        }
+
+        .contact-help {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--pink-gradient);
+            border-radius: 20px;
+            color: var(--white);
+        }
+
+        .contact-help h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .contact-help p {
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: var(--white);
+            color: var(--primary-color);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .faq-intro h2 {
+                font-size: 1.6rem;
+            }
+
+            .faq-intro p {
+                font-size: 1rem;
+            }
+
+            .faq-categories {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .category-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .faq-question {
+                padding: 20px 20px;
+                gap: 15px;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-icon {
+                font-size: 1.3rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 20px 20px 20px;
+                font-size: 0.95rem;
+            }
+
+            .search-input {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+
+            .contact-help {
+                padding: 30px 20px;
+                margin-top: 40px;
+            }
+
+            .contact-help h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-help p {
+                font-size: 0.95rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-intro h2 {
+                font-size: 1.4rem;
+            }
+
+            .faq-question {
+                padding: 15px;
+            }
+
+            .faq-question h3 {
+                font-size: 0.95rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 15px 15px 15px;
+                font-size: 0.9rem;
+            }
+
+            .contact-help {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
+            .contact-help h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="homepages.html">Emily Jewelry</a>
+                </div>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="product.html" class="nav-link">Produk</a>
+                    <a href="tentang.html" class="nav-link">Tentang</a>
+                    <a href="FAQ.html" class="nav-link active">Faq</a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Pertanyaan yang Sering Diajukan</h1>
+            <p>Temukan jawaban untuk pertanyaan Anda</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="faq-container">
+                <!-- Intro -->
+                <div class="faq-intro fade-in">
+                    <h2>Ada Pertanyaan?</h2>
+                    <p>Kami telah mengumpulkan pertanyaan yang paling sering ditanyakan untuk membantu Anda</p>
+                </div>
+
+                <!-- Search Box -->
+                <div class="faq-search fade-in">
+                    <input type="text" 
+                           class="search-input" 
+                           id="faqSearch" 
+                           placeholder="🔍 Cari pertanyaan...">
+                </div>
+
+                <!-- Category Filter -->
+                <div class="faq-categories fade-in">
+                    <button class="category-btn active" data-category="all">Semua</button>
+                    <button class="category-btn" data-category="produk">Produk</button>
+                    <button class="category-btn" data-category="pembayaran">Pembayaran</button>
+                    <button class="category-btn" data-category="pengiriman">Pengiriman</button>
+                    <button class="category-btn" data-category="layanan">Layanan</button>
+                </div>
+
+                <!-- FAQ List -->
+                <div class="faq-list" id="faqList">
+                    <!-- Produk -->
+                    <div class="faq-item slide-up" data-category="produk">
+                        <div class="faq-question">
+                            <h3>Apakah produk jewelry di toko ini original dan berkualitas?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya, kami menjamin 100% keaslian semua produk jewelry yang dijual. Semua produk telah melalui quality control ketat sebelum dikirim kepada customer. Anda bisa cek rating dan review dari pembeli lain di halaman toko kami.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="produk">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara melihat katalog produk lengkap?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Silakan kunjungi toko kami di Shopee atau marketplace favorit Anda. Di sana tersedia katalog lengkap dengan foto detail, deskripsi produk, harga, dan review dari pembeli sebelumnya.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="produk">
+                        <div class="faq-question">
+                            <h3>Apakah ada garansi untuk produk jewelry?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya, kami memberikan garansi keaslian untuk semua produk. Jika terdapat cacat produksi atau ketidaksesuaian produk, Anda dapat mengajukan retur atau penukaran melalui sistem marketplace dalam waktu 7 hari setelah barang diterima.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pembayaran -->
+                    <div class="faq-item slide-up" data-category="pembayaran">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara melakukan pembayaran?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Pembayaran dilakukan melalui sistem marketplace (Shopee, Tokopedia, dll). Anda bisa memilih berbagai metode pembayaran yang tersedia seperti Transfer Bank, E-Wallet (OVO, GoPay, Dana, ShopeePay), Kartu Kredit/Debit, atau COD tergantung pilihan yang tersedia di platform.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="pembayaran">
+                        <div class="faq-question">
+                            <h3>Apakah aman berbelanja di toko ini?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Sangat aman! Semua transaksi dilindungi oleh sistem keamanan marketplace. Pembayaran Anda akan ditahan oleh platform dan baru diteruskan ke penjual setelah Anda konfirmasi barang diterima dengan baik.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="pembayaran">
+                        <div class="faq-question">
+                            <h3>Apakah tersedia promo atau diskon?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya! Kami sering mengadakan promo menarik seperti flash sale, diskon voucher, dan gratis ongkir. Follow toko kami di marketplace dan aktifkan notifikasi untuk mendapatkan update promo terbaru. Anda juga bisa cek halaman promo di platform marketplace.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pengiriman -->
+                    <div class="faq-item slide-up" data-category="pengiriman">
+                        <div class="faq-question">
+                            <h3>Berapa lama estimasi pengiriman?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Pesanan akan kami proses dalam 1-2 hari kerja setelah pembayaran dikonfirmasi. Estimasi pengiriman tergantung jasa ekspedisi dan lokasi: Jabodetabek 2-4 hari, Pulau Jawa 3-5 hari, Luar Jawa 5-10 hari kerja. Cek estimasi detail di halaman checkout marketplace.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="pengiriman">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara tracking pesanan saya?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Setelah pesanan dikirim, nomor resi akan otomatis muncul di halaman pesanan Anda di marketplace. Anda bisa tracking langsung melalui aplikasi marketplace atau klik nomor resi untuk melihat posisi paket Anda.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="pengiriman">
+                        <div class="faq-question">
+                            <h3>Apakah ada gratis ongkir?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya! Kami sering memberikan voucher gratis ongkir untuk pembelian tertentu. Selain itu, Anda bisa memanfaatkan voucher gratis ongkir dari marketplace pada hari-hari tertentu. Pantau terus halaman toko kami untuk info promo terbaru.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="pengiriman">
+                        <div class="faq-question">
+                            <h3>Apakah paket diasuransikan?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Kami sangat menyarankan untuk menambahkan asuransi pengiriman saat checkout untuk melindungi paket Anda dari kehilangan atau kerusakan selama pengiriman. Biaya asuransi sangat terjangkau dan akan melindungi nilai produk Anda.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layanan -->
+                    <div class="faq-item slide-up" data-category="layanan">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara melakukan retur atau komplain?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Jika ada masalah dengan pesanan, Anda bisa mengajukan retur/komplain melalui fitur "Ajukan Komplain" atau "Pengembalian" di halaman pesanan marketplace Anda. Tim kami akan merespons dalam 1x24 jam. Pastikan produk masih dalam kondisi baik dan lengkap dengan kemasan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="layanan">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara menghubungi customer service?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Anda dapat menghubungi kami melalui: 1) Fitur Chat di marketplace (respon cepat saat jam kerja), 2) WhatsApp di +62 812-3456-7890, atau 3) Diskusi Produk di halaman marketplace. Kami siap membantu Anda Senin-Sabtu pukul 09:00-18:00 WIB.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="layanan">
+                        <div class="faq-question">
+                            <h3>Apakah bisa custom atau pre-order produk?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya, kami menerima pre-order untuk produk tertentu yang sedang tidak tersedia. Untuk custom atau pesanan khusus, silakan hubungi customer service kami melalui chat marketplace atau WhatsApp untuk diskusi lebih lanjut mengenai ketersediaan dan harga.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item slide-up" data-category="layanan">
+                        <div class="faq-question">
+                            <h3>Apakah ada diskon untuk pembelian dalam jumlah banyak?</h3>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Ya! Kami memberikan harga khusus untuk pembelian grosir atau dalam jumlah banyak. Silakan chat customer service kami melalui marketplace atau WhatsApp untuk mendapatkan penawaran harga terbaik sesuai dengan jumlah pembelian Anda.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <p>😔 Tidak ada hasil yang ditemukan. Coba kata kunci lain atau hubungi customer service kami.</p>
+                </div>
+
+                <!-- Contact Help Section -->
+                <div class="contact-help fade-in">
+                    <h3>Masih Ada Pertanyaan?</h3>
+                    <p>Tim customer service kami siap membantu Anda</p>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/6281414030612" class="contact-btn" target="_blank">
+                            <span>💬</span>
+                            <span>Chat WhatsApp</span>
+                        </a>
+                        <a href="https://shopee.co.id/emilly_jewelry?shopCollection=143908184#product_list" class="contact-btn" target="_blank">
+                            <span>🛍️</span>
+                            <span>Kunjungi Toko</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Emily Jewelry</h3>
+                    <p>Toko online terpercaya untuk kebutuhan fashion dan lifestyle Anda.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Link Cepat</h4>
+                    <ul>
+                        <li><a href="homepages.html">Beranda</a></li>
+                        <li><a href="product.html">Produk</a></li>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <p>📧 Email:emilyjewelry96@gmail.com</p>
+                    <p>📱 WhatsApp: +62 0814-1403-0612</p>
+                    <p>📍 Jakarta pusat, Indonesia</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Emily Jewelry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6281414030612" class="whatsapp-float" target="_blank" aria-label="Chat WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+    </a>
+
+    <script src="history-manager.js"></script>
+    <script>
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Push history when menu opens so back button closes it
+            if (navMenu.classList.contains('active') && window.HistoryManager) {
+                HistoryManager.push('faq-mobile-menu', { open: true });
+            }
+        });
+
+        // Back button closes hamburger menu
+        if (window.HistoryManager) {
+            HistoryManager.onBack('faq-mobile-menu', function () {
+                navMenu.classList.remove('active');
+            });
+        }
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach((item, index) => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                    // Push history so back button closes this FAQ
+                    if (window.HistoryManager) {
+                        HistoryManager.push('faq-accordion', { openIndex: index });
+                    }
+                }
+            });
+        });
+
+        // Back button closes open FAQ accordion
+        if (window.HistoryManager) {
+            HistoryManager.onBack('faq-accordion', function () {
+                faqItems.forEach(i => i.classList.remove('active'));
+            });
+        }
+
+        // Category Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const faqList = document.getElementById('faqList');
+        const noResults = document.getElementById('noResults');
+
+        var _prevFaqCategory = 'all';
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                var oldCategory = _prevFaqCategory;
+
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter FAQ items
+                const category = btn.dataset.category;
+                _prevFaqCategory = category;
+                let visibleCount = 0;
+
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+                // Push history so back restores previous category
+                if (window.HistoryManager && category !== oldCategory) {
+                    HistoryManager.push('faq-category', { category: oldCategory });
+                }
+            });
+        });
+
+        // Back button restores previous FAQ category
+        if (window.HistoryManager) {
+            HistoryManager.onBack('faq-category', function (data) {
+                var cat = data.category || 'all';
+                _prevFaqCategory = cat;
+                // Activate the correct button
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active');
+                    if (b.dataset.category === cat) b.classList.add('active');
+                });
+                // Re-filter
+                var visibleCount = 0;
+                faqItems.forEach(item => {
+                    if (cat === 'all' || item.dataset.category === cat) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        }
+
+        // Search Functionality
+        const searchInput = document.getElementById('faqSearch');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            let visibleCount = 0;
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
+
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+            // Reset category filter when searching
+            if (searchTerm) {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
